@@ -1,0 +1,65 @@
+define_sdlc_roadmap_task:
+  description: The project_manager outlines key SDLC phases—including ideation, analysis,
+    design, development, testing, and deployment—by leveraging the provided {project_idea}.
+    The roadmap must detail the transition from prototyping on {dev_platform} to production
+    deployment on {prod_deployment_platform} using stack components {project_stack} for crewai perspective.
+  expected_output: A detailed SDLC roadmap capturing phases, timelines, task assignments,
+    and integration points.
+  async_execution: false
+  agent: project_manager
+gather_requirements_task:
+  description: The business_analyst collects and structures the detailed requirements from 
+    {project_idea} and other initial inputs converting them into a comprehensive
+    {requirements_specification}. The task should factor in integration details from
+    {project_stack} and essential business insights.
+  expected_output: A well-documented requirements specification that outlines functional
+    and non-functional needs.
+  async_execution: false
+  agent: business_analyst
+  context:
+  - define_sdlc_roadmap_task
+architectural_design_task:
+  description: The software_architect uses the output from {requirements_specification}
+    along with stack details {project_stack} to design a robust, scalable system architecture.
+    This design must ensure fault tolerance in {prod_deployment_platform} and cater
+    to the Conversational and Agentic AI capabilities of {dev_platform}.
+  expected_output: An architectural design document detailing system components, integration
+    points, and deployment strategies.
+  async_execution: false
+  agent: software_architect
+  context:
+  - gather_requirements_task
+development_implementation_task:
+  description: The developer implements the functionality by coding and integrating
+    each component from {project_stack} (including Chainlit GitHub integration, CrewAI,
+    Brain Calling via litellm, Google Gemini-2.0-flash, MCP Server, Docker & Cloud,
+    and GitHub for version control) as per the architectural design. The implementation
+    must also adhere to {technical_constraints}.
+  expected_output: A functional and integrated codebase template of crewai agent along with initial automated
+    tests validating individual components.
+  async_execution: false
+  agent: developer
+  context:
+  - architectural_design_task
+qa_testing_task:
+  description: The qa_engineer executes a series of tests based on {testing_criteria}
+    to validate that the system is fully integrated, fault tolerant, and meets performance
+    standards across all stack components {project_stack}. This includes regression
+    tests and integration tests post-development.
+  expected_output: Comprehensive test reports and validation of system readiness for
+    deployment.
+  async_execution: false
+  agent: qa_engineer
+  context:
+  - development_implementation_task
+documentation_deployment_task:
+  description: The technical_writer collates the entire process, documenting the architectural
+    design, integration steps, code implementation details, testing outcomes, and
+    deployment guidelines. The documentation should be structured in {documentation_format}
+    and updated with every handoff.
+  expected_output: Clear and complete documentation including user manuals, API guides,
+    and deployment instructions.
+  async_execution: false
+  agent: technical_writer
+  context:
+  - qa_testing_task
