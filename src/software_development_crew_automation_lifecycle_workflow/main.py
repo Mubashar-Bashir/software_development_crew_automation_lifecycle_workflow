@@ -6,21 +6,6 @@ from .crew import save_output_to_markdown
 # crew locally, so refrain from adding unnecessary logic into this file.
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
-
-# def run():
-#     """
-#     Run the crew.
-#     """
-#     inputs = {
-#         'project_idea': 'sample_value',
-#         'dev_platform': 'sample_value',
-#         'prod_deployment_platform': 'sample_value',
-#         'project_stack': 'sample_value',
-#         'requirements_specification': 'sample_value',
-#         'technical_constraints': 'sample_value',
-#         'testing_criteria': 'sample_value',
-#         'documentation_format': 'sample_value'
-#     }
 def run():
     """
     Run the AI Email Responder Crew with structured test inputs.
@@ -35,43 +20,12 @@ def run():
         'testing_criteria': 'Ensure accurate response generation & email parsing.',
         'documentation_format': 'Markdown (README.md), or Filename ({filename}.py)'
     }
-    # SoftwareDevelopmentCrewAutomationLifecycleWorkflowCrew().crew().kickoff(inputs=inputs)
-
-    # Initialize the crew
+# Initialize the crew
     crew_instance = SoftwareDevelopmentCrewAutomationLifecycleWorkflowCrew()
-
-    # results = crew_instance.crew().kickoff(inputs=inputs)  # Returns a CrewOutput object
-
-    # print(type(results))  # <class 'crewai.output.CrewOutput'>
-
-    # Accessing individual components
-    # print(results.tasks_output[0].raw)  # ✅ Dictionary of {task_name: task_output}
-          # ✅ Execution logs
-
-    # Loop through all task outputs
-    # for name, output in results.tasks_output.items():
-    #     print(f"Task: {task_name}\nOutput: {output}\n")
-
-
-    # # Run the crew and capture task results
-    # results = crew_instance.crew().kickoff(inputs=inputs)
-    # print(results)
-
-    # # Iterate over task results and save outputs
-    # for task_name, tasks_output in results.tasks_output.items():
-    #     if tasks_output:
-    #         # task_name = task.config.get('name', 'unknown_task')  # Default if no name is found
-    #         save_output_to_markdown(task_name, tasks_output)
-    #     else:
-    #         print("output not captured from results.items")
-
-    # print("✅ All task outputs saved successfully!")
-    # src/software_development_crew_automation_lifecycle_workflow/main.py
-
 # Run the crew and capture task results
     results = crew_instance.crew().kickoff(inputs=inputs)
 
-    # Iterate over task results and save outputs
+# Iterate over task results and save outputs
     for index, task_output in enumerate(results.tasks_output):
         if task_output:
             # Extract the task name from the task output
